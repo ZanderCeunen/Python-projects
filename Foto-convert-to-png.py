@@ -2,24 +2,34 @@ import os
 from PIL import Image
 
 
-def convert_images(invoermap, uitvoermap):
-    if not os.path.exists(uitvoermap):
-        os.makedirs(uitvoermap)
+def convert_images(invoer_map, uitvoer_map):
+    # Als de uitvoer_map niet bestaat, maak die dan.
+    if not os.path.exists(uitvoer_map):
+        os.makedirs(uitvoer_map)
 
-    for invoer_bestandsnaam in os.listdir(invoermap):
+    # Voor elk bestand in de invoer_map.
+    for invoer_bestandsnaam in os.listdir(invoer_map):
+
+        # Filter de foto's uit de bestanden van de invoer_map.
         if invoer_bestandsnaam.lower().endswith(('.png', '.jpg', '.jpeg')):
-            file_path = os.path.join(invoermap, invoer_bestandsnaam)
+            file_path = os.path.join(invoer_map, invoer_bestandsnaam)
             try:
                 with Image.open(file_path) as img:
+                    # Maak bestandsnaam met png in plaats van jpg of jpeg
                     uitvoer_bestandsnaam = invoer_bestandsnaam.split(".")[0] + ".png"
-                    img.save(os.path.join(uitvoermap, uitvoer_bestandsnaam), 'PNG')
+
+                    # Sla de foto op in het PNG-formaat met de nieuwe bestandsnaam.
+                    img.save(os.path.join(uitvoer_map, uitvoer_bestandsnaam), 'PNG')
+
             except Exception as e:
+                # Geef error weer voor debugging
                 print(f"Error processing {invoer_bestandsnaam}: {str(e)}")
 
-#Maak de input folder gelijk aan huidige map
-invoermap = os.path.dirname(os.path.realpath(__file__))
 
-#Vraag de gebruiker waar de uitvoer moet worden opgeslaan.
-uitvoermap = input("Wat is de uitvoer map: ")
+# Maakt de invoer_map gelijk aan huidige map
+invoer_map = os.path.dirname(os.path.realpath(__file__))
 
-convert_images(invoermap, uitvoermap)
+# Vraag de gebruiker waar de uitvoer bewaart moet worden en bewaar in uitvoer_map.
+uitvoer_map = input("Wat is de uitvoer map: ")
+
+convert_images(invoer_map, uitvoer_map)
