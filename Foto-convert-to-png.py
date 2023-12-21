@@ -1,3 +1,4 @@
+#importeer de nodige onderdelen
 import os
 from PIL import Image
 
