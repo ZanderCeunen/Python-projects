@@ -1,0 +1,11 @@
+from PIL import Image
+import os
+
+# Get list of HEIF and HEIC files in directory
+directory = os.getcwd()
+files = [f for f in os.listdir(directory) if f.endswith('.heic') or f.endswith('.heif')]
+
+# Convert each file to JPEG
+for filename in files:
+    image = Image.open(os.path.join(directory, filename))
+    image.convert('RGB').save(os.path.join(directory, os.path.splitext(filename)[0] + '.jpg'))
