@@ -12,7 +12,7 @@ def convert_images(invoer_map, uitvoer_map):
     for invoer_bestandsnaam in os.listdir(invoer_map):
 
         # Filter de foto's uit de bestanden van de invoer_map.
-        if invoer_bestandsnaam.lower().endswith(('.png', '.jpg', '.jpeg')):
+        if invoer_bestandsnaam.lower().endswith(('.heic', '.png', '.jpg', '.jpeg')):
             file_path = os.path.join(invoer_map, invoer_bestandsnaam)
             try:
                 with Image.open(file_path) as img:
